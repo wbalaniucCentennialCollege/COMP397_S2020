@@ -15,7 +15,17 @@
     "url": "https://github.com/wbalaniucCentennialCollege/COMP397_S2020/issues"
   },
   "homepage": "https://github.com/wbalaniucCentennialCollege/COMP397_S2020#readme",
-  "dependencies": {},
-  "devDependencies": {},
+  "dependencies": {
+    "easeljs": "^1.0.2",
+    "preloadjs": "^1.0.1",
+    "soundjs": "^1.0.1",
+    "tweenjs": "^1.0.2"
+  },
+  "devDependencies": {
+    "@types/easeljs": "^1.0.0",
+    "@types/preloadjs": "^0.6.32",
+    "@types/soundjs": "^0.6.28",
+    "@types/tweenjs": "^1.0.1"
+  },
   "description": ""
 }

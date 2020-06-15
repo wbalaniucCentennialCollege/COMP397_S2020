@@ -23,7 +23,7 @@
     }
 
     function Update() {
-        stage.Update();
+        stage.update();
 
         // Movement here
         helloLabel.scaleX += 0.001;
