@@ -8,9 +8,22 @@
     let helloLabel:objects.Label;
     let clickMeButton:objects.Button;
 
+    let assetManager:createjs.LoadQueue;
+    let assetManifest: any[];
+
+    assetManifest = [
+        {id:"clickMeButton", src:"./Assets/ClickMeButton.png"}
+    ];
+
     function Init() {
         console.log("Initializing Start");
-        Start();
+
+        assetManager = new createjs.LoadQueue();
+        assetManager.installPlugin(createjs.Sound);
+        assetManager.loadManifest(assetManifest);
+        assetManager.on("complete", Start, this);
+
+        // Start();
     }
 
     function Start() {
@@ -45,7 +58,7 @@
         helloLabel = new objects.Label("Hello World", "40px", "Consolas", "#000000", 320, 240, true);
 
         // Button instantiation
-        clickMeButton = new objects.Button("./Assets/ClickMeButton.png", 320, 340);
+        clickMeButton = new objects.Button(assetManager, "clickMeButton", 320, 340);
         clickMeButton.regX = 95;
         clickMeButton.regY = 24.5;
         clickMeButton.on("click", clickMeButtonClicked);
