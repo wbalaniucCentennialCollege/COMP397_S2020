@@ -25,14 +25,17 @@ var scenes;
             this.nextButton = new objects.Button(this.assetManager, "nextButton", 500, 340);
             this.backButton = new objects.Button(this.assetManager, "backButton", 100, 340);
             this.background = new objects.Background(this.assetManager);
+            this.player = new objects.Player(this.assetManager);
             this.Main();
         };
         PlayScene.prototype.Update = function () {
             this.background.Update();
+            this.player.Update();
         };
         PlayScene.prototype.Main = function () {
             this.addChild(this.background);
             this.addChild(this.playLabel);
+            this.addChild(this.player);
             this.addChild(this.nextButton);
             this.addChild(this.backButton);
             // Register for click events
