@@ -4,6 +4,7 @@ module scenes {
         private playLabel: objects.Label;
         private nextButton: objects.Button;
         private backButton: objects.Button;
+        private background: objects.Background;
 
         // Constructor
         constructor(assetManager:createjs.LoadQueue) {
@@ -18,13 +19,17 @@ module scenes {
             this.playLabel = new objects.Label( "Game Playing", "40px", "Consolas", "#000000", 320, 240, true);
             this.nextButton = new objects.Button(this.assetManager, "nextButton", 500, 340);
             this.backButton = new objects.Button(this.assetManager, "backButton", 100, 340);
+            this.background = new objects.Background(this.assetManager);
 
             this.Main();
         }
 
-        public Update():void {}
+        public Update():void {
+            this.background.Update();
+        }
 
         public Main():void {
+            this.addChild(this.background);
             this.addChild(this.playLabel);
             this.addChild(this.nextButton);
             this.addChild(this.backButton);

@@ -16,7 +16,8 @@
     assetManifest = [
         {id:"startButton", src:"./Assets/StartButton.png"},
         {id:"nextButton", src:"./Assets/NextButton.png"},
-        {id:"backButton", src:"./Assets/BackButton.png"}
+        {id:"backButton", src:"./Assets/BackButton.png"},
+        {id:"background", src:"./Assets/background.png"}
     ];
 
     function Init() {
