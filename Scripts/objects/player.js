@@ -22,8 +22,6 @@ var objects;
         Player.prototype.Start = function () {
             this.x = 320;
             this.y = 700;
-            this.scaleX = 0.25;
-            this.scaleY = 0.25;
         };
         Player.prototype.Update = function () {
             this.Move();
@@ -36,7 +34,17 @@ var objects;
             // This will eventually be replaced with keyboard input
             // Maybe xbox controller....maybe...
         };
-        Player.prototype.CheckBound = function () { };
+        Player.prototype.CheckBound = function () {
+            // Right boundary
+            if (this.x >= 640 - this.halfW) {
+                // I have collided with the right boundary
+                this.x = 640 - this.halfW;
+            }
+            // Left boundary
+            if (this.x <= this.halfW) {
+                this.x = this.halfW;
+            }
+        };
         return Player;
     }(objects.GameObject));
     objects.Player = Player;

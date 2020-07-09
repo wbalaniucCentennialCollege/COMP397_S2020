@@ -10,9 +10,6 @@ module objects {
         public Start():void {
             this.x = 320;
             this.y = 700;
-
-            this.scaleX = 0.25;
-            this.scaleY = 0.25;
         }
         public Update():void {
             this.Move();
@@ -25,6 +22,17 @@ module objects {
             // This will eventually be replaced with keyboard input
             // Maybe xbox controller....maybe...
         }
-        public CheckBound():void {}
+        public CheckBound():void {
+            // Right boundary
+            if(this.x >= 640 - this.halfW)
+            {
+                // I have collided with the right boundary
+                this.x = 640 - this.halfW;
+            }
+            // Left boundary
+            if(this.x <= this.halfW) {
+                this.x = this.halfW;
+            }
+        }
     }
 }

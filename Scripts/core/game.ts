@@ -18,7 +18,8 @@
         {id:"nextButton", src:"./Assets/NextButton.png"},
         {id:"backButton", src:"./Assets/BackButton.png"},
         {id:"background", src:"./Assets/background.png"},
-        {id:"player", src:"./Assets/spaceship.png"}
+        {id:"player", src:"./Assets/spaceship.png"},
+        {id:"enemy", src:"./Assets/enemy.png"}
     ];
 
     function Init() {
