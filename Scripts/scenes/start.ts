@@ -4,6 +4,7 @@ module scenes {
         private background: objects.Background;
         private welcomeLabel: objects.Label;
         private startButton: objects.Button;
+        private backgroundMusic: createjs.AbstractSoundInstance;
 
         // Constructor
         constructor(assetManager:createjs.LoadQueue) {
@@ -19,6 +20,12 @@ module scenes {
 
             // NOTE: PreloadJS manifest id
             this.startButton = new objects.Button(this.assetManager, "nextButton", 320, 300);
+
+            // Instantiate Sound
+            this.backgroundMusic = createjs.Sound.play("start_music");
+            this.backgroundMusic.loop = -1;
+            this.backgroundMusic.volume = 0.2;
+
             this.Main();
         }
 

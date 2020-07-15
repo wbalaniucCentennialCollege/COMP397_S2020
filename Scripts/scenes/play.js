@@ -29,6 +29,11 @@ var scenes;
             for (var i = 0; i < this.enemyNum; i++) {
                 this.enemies[i] = new objects.Enemy(this.assetManager);
             }
+            // Instantiate Sound
+            createjs.Sound.stop();
+            this.backgroundMusic = createjs.Sound.play("play_music");
+            this.backgroundMusic.loop = -1; // Loop infinitely
+            this.backgroundMusic.volume = 0.2;
             this.Main();
         };
         PlayScene.prototype.Update = function () {

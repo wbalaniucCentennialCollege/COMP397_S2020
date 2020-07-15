@@ -10,7 +10,13 @@ module managers {
                 if(!obj2.isColliding)
                 {
                     // React to our collision
-                    console.log("Collision with " + obj2.name);
+                    // Check what I am colliding with. 
+                    switch(obj2.name) {
+                        case "enemy":
+                            createjs.Sound.play("explosion");
+                            break;
+                    }
+
                     obj2.isColliding = true;
                 }
             }

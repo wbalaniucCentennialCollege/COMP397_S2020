@@ -14,7 +14,10 @@
         { id: "backButton", src: "./Assets/BackButton.png" },
         { id: "background", src: "./Assets/background.png" },
         { id: "player", src: "./Assets/spaceship.png" },
-        { id: "enemy", src: "./Assets/enemy.png" }
+        { id: "enemy", src: "./Assets/enemy.png" },
+        { id: "explosion", src: "./Assets/Audio/explode.wav" },
+        { id: "start_music", src: "./Assets/Audio/Title Screen.wav" },
+        { id: "play_music", src: "./Assets/Audio/Level 1.wav" }
     ];
     function Init() {
         console.log("Initializing Start");
