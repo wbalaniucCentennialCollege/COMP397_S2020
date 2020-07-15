@@ -32,11 +32,13 @@ var scenes;
             this.Main();
         };
         PlayScene.prototype.Update = function () {
+            var _this = this;
             // this.background.Update();
             this.player.Update();
             // this.enemy.Update();
             this.enemies.forEach(function (e) {
                 e.Update();
+                managers.Collision.Check(_this.player, e);
             });
         };
         PlayScene.prototype.Main = function () {

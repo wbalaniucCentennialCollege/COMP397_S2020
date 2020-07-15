@@ -28,6 +28,7 @@ var objects;
             // Registration points
             this.regX = this.halfW;
             this.regY = this.halfH;
+            this.isColliding = false;
         };
         GameObject.prototype.Start = function () { };
         GameObject.prototype.Update = function () { };
