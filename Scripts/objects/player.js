@@ -30,8 +30,14 @@ var objects;
         Player.prototype.Reset = function () { };
         Player.prototype.Move = function () {
             // I need a reference to the "STAGE" createjs object to get mouse position
-            this.x = objects.Game.stage.mouseX;
+            // this.x = objects.Game.stage.mouseX;
             // This will eventually be replaced with keyboard input
+            if (objects.Game.keyboardManager.moveLeft) {
+                this.x -= 7.5;
+            }
+            if (objects.Game.keyboardManager.moveRight) {
+                this.x += 7.5;
+            }
             // Maybe xbox controller....maybe...
         };
         Player.prototype.CheckBound = function () {
