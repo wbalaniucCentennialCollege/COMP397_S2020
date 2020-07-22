@@ -1,10 +1,10 @@
-var objects;
-(function (objects) {
+var managers;
+(function (managers) {
     var Game = (function () {
         function Game() {
         }
         return Game;
     }());
-    objects.Game = Game;
-})(objects || (objects = {}));
+    managers.Game = Game;
+})(managers || (managers = {}));
 //# sourceMappingURL=game.js.map

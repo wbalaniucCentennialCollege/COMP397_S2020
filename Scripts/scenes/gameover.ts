@@ -31,7 +31,7 @@ module scenes {
         }
 
         private backButtonClick():void {
-            objects.Game.currentScene = config.Scene.GAME;
+            managers.Game.currentScene = config.Scene.GAME;
         }
     }
 }

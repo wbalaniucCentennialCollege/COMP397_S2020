@@ -32,7 +32,7 @@ var scenes;
             this.backButton.on("click", this.backButtonClick);
         };
         GameOverScene.prototype.backButtonClick = function () {
-            objects.Game.currentScene = config.Scene.GAME;
+            managers.Game.currentScene = config.Scene.GAME;
         };
         return GameOverScene;
     }(objects.Scene));

@@ -1,4 +1,4 @@
-module objects {
+module managers {
     export class Game {
         // GLOBAL VARIABLES
         public static stage: createjs.Stage;
