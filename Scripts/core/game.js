@@ -9,13 +9,43 @@
     var currentScene;
     var currentState;
     var keyboardManager;
+    var textureAtlasData;
+    var textureAtlas;
+    textureAtlasData = {
+        "images": [
+            ""
+        ],
+        "framerate": 20,
+        "frames": [
+            [19, 1, 39, 31, 0, 0, 0],
+            [153, 154, 98, 85, 0, 0, 0],
+            [101, 1, 36, 36, 0, 0, 0],
+            [112, 90, 68, 62, 0, 0, 0],
+            [1, 90, 66, 60, 0, 0, 0],
+            [182, 90, 68, 62, 0, 0, 0],
+            [1, 154, 74, 62, 0, 0, 0],
+            [77, 154, 74, 62, 0, 0, 0],
+            [1, 1, 16, 21, 0, 0, 0],
+            [60, 1, 39, 31, 0, 0, 0],
+            [69, 90, 41, 61, 0, 0, 0],
+            [1, 39, 190, 49, 0, 0, 0]
+        ],
+        "animations": {
+            "backButton": { "frames": [0] },
+            "enemy": { "frames": [1] },
+            "explosion": {
+                "frames": [2, 7],
+                "speed": 0.1
+            },
+            "laser": { "frames": [8] },
+            "nextButton": { "frames": [9] },
+            "player": { "frames": [10] },
+            "startButton": { "frames": [11] }
+        },
+    };
     assetManifest = [
-        { id: "startButton", src: "./Assets/StartButton.png" },
-        { id: "nextButton", src: "./Assets/NextButton.png" },
-        { id: "backButton", src: "./Assets/BackButton.png" },
+        { id: "textureAtlas", src: "./Assets/Sprites/textureAtlas2.png" },
         { id: "background", src: "./Assets/background.png" },
-        { id: "player", src: "./Assets/spaceship.png" },
-        { id: "enemy", src: "./Assets/enemy.png" },
         { id: "explosion", src: "./Assets/Audio/explode.wav" },
         { id: "start_music", src: "./Assets/Audio/Title Screen.wav" },
         { id: "play_music", src: "./Assets/Audio/Level 1.wav" }
@@ -29,6 +59,8 @@
     }
     function Start() {
         console.log("Starting Application...");
+        textureAtlasData.images = [assetManager.getResult("textureAtlas")];
+        textureAtlas = new createjs.SpriteSheet(textureAtlasData);
         // Initialize CreateJS
         stage = new createjs.Stage(canvas);
         stage.enableMouseOver(20);
@@ -40,6 +72,8 @@
         currentState = config.Scene.START;
         keyboardManager = new managers.Keyboard;
         managers.Game.keyboardManager = keyboardManager;
+        managers.Game.assetManager = assetManager;
+        managers.Game.textureAtlas = textureAtlas;
         Main();
     }
     function Update() {
@@ -57,21 +91,22 @@
         switch (managers.Game.currentScene) {
             case config.Scene.START:
                 stage.removeAllChildren();
-                currentScene = new scenes.StartScene(assetManager);
+                currentScene = new scenes.StartScene();
                 stage.addChild(currentScene);
                 break;
             case config.Scene.GAME:
                 stage.removeAllChildren();
-                currentScene = new scenes.PlayScene(assetManager);
+                currentScene = new scenes.PlayScene();
                 stage.addChild(currentScene);
                 break;
             case config.Scene.OVER:
                 stage.removeAllChildren();
-                currentScene = new scenes.GameOverScene(assetManager);
+                currentScene = new scenes.GameOverScene();
                 stage.addChild(currentScene);
                 break;
         }
         currentState = managers.Game.currentScene;
+        managers.Game.currentSceneObject = currentScene;
     }
     window.onload = Init;
 })();

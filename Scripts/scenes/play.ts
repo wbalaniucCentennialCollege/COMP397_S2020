@@ -7,12 +7,14 @@ module scenes {
         private enemies:objects.Enemy[];
         private enemyNum:number;
         private scoreBoard:managers.Scoreboard;
+        private isExploding:boolean = false;
+        private explosion:objects.Explosion;
 
         private backgroundMusic:createjs.AbstractSoundInstance;
 
         // Constructor
-        constructor(assetManager:createjs.LoadQueue) {
-            super(assetManager);
+        constructor() {
+            super();
 
             this.Start();
         }
@@ -20,13 +22,13 @@ module scenes {
         public Start():void {
             console.log("Play scene start");
             // Inintialize our variables
-            this.background = new objects.Background(this.assetManager);
-            this.player = new objects.Player(this.assetManager);
+            this.background = new objects.Background();
+            this.player = new objects.Player();
             // this.enemy = new objects.Enemy(this.assetManager);
             this.enemies = new Array<objects.Enemy>();
             this.enemyNum = 5;
             for(let i = 0; i < this.enemyNum; i++) {
-                this.enemies[i] = new objects.Enemy(this.assetManager);
+                this.enemies[i] = new objects.Enemy();
             }
 
             this.scoreBoard = new managers.Scoreboard();
@@ -48,7 +50,21 @@ module scenes {
             // this.enemy.Update();
             this.enemies.forEach(e => {
                 e.Update();
-                managers.Collision.Check(this.player, e);
+                this.player.isDead = managers.Collision.Check(this.player, e);
+
+                if(this.player.isDead && !this.isExploding)
+                {
+                    // If the player is dead and hasn't exploded...explode!
+                    // Disable music
+                    this.backgroundMusic.stop();
+
+                    // Create the explosion
+                    this.explosion = new objects.Explosion(this.player.x, this.player.y);
+                    this.explosion.on("animationend", this.handleExplosion);
+                    this.addChild(this.explosion);
+                    this.isExploding = true;
+                    this.removeChild(this.player);
+                }
             })
         }
 
@@ -60,6 +76,12 @@ module scenes {
                 this.addChild(e);
             });
             this.addChild(this.scoreBoard);
+        }
+
+        private handleExplosion() {
+            this.stage.removeChild(this.explosion);
+            this.isExploding = false;
+            managers.Game.currentScene = config.Scene.OVER;
         }
     }
 }

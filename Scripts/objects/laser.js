@@ -10,37 +10,35 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var objects;
 (function (objects) {
-    var Enemy = (function (_super) {
-        __extends(Enemy, _super);
+    var Laser = (function (_super) {
+        __extends(Laser, _super);
         // Variables
         // Constructor
-        function Enemy() {
-            var _this = _super.call(this, "enemy") || this;
+        function Laser() {
+            var _this = _super.call(this, "laser") || this;
             _this.Start();
             return _this;
         }
         // Methods
-        Enemy.prototype.Start = function () {
+        Laser.prototype.Start = function () {
+            this.speedX = 0;
+            this.speedY = -10;
             this.Reset();
         };
-        Enemy.prototype.Update = function () {
+        Laser.prototype.Update = function () {
             this.Move();
-            this.CheckBound();
         };
-        Enemy.prototype.Reset = function () {
-            this.x = Math.floor(Math.random() * 540) + 50;
-            this.y = Math.floor(Math.random() * -800) - 50;
+        Laser.prototype.Reset = function () {
+            this.x = -5000;
+            this.y = -5000;
         };
-        Enemy.prototype.Move = function () {
-            this.y += 5;
+        Laser.prototype.Move = function () {
+            this.y += this.speedY;
         };
-        Enemy.prototype.CheckBound = function () {
-            if (this.y >= 900 + this.halfH + 25) {
-                this.Reset();
-            }
-        };
-        return Enemy;
+        Laser.prototype.Main = function () { };
+        Laser.prototype.CheckBounds = function () { };
+        return Laser;
     }(objects.GameObject));
-    objects.Enemy = Enemy;
+    objects.Laser = Laser;
 })(objects || (objects = {}));
-//# sourceMappingURL=enemy.js.map
+//# sourceMappingURL=laser.js.map

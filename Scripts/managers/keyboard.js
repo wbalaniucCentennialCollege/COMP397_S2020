@@ -29,6 +29,7 @@ var managers;
                     break;
                 case config.Keys.SPACE:
                     console.log("pew pew");
+                    this.shoot = true;
                     break;
             }
         };
@@ -51,6 +52,7 @@ var managers;
                     this.moveRight = false;
                     break;
                 case config.Keys.SPACE:
+                    this.shoot = false;
                     console.log("pew pew off");
                     break;
             }

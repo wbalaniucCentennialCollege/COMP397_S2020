@@ -13,21 +13,22 @@ var scenes;
     var PlayScene = (function (_super) {
         __extends(PlayScene, _super);
         // Constructor
-        function PlayScene(assetManager) {
-            var _this = _super.call(this, assetManager) || this;
+        function PlayScene() {
+            var _this = _super.call(this) || this;
+            _this.isExploding = false;
             _this.Start();
             return _this;
         }
         PlayScene.prototype.Start = function () {
             console.log("Play scene start");
             // Inintialize our variables
-            this.background = new objects.Background(this.assetManager);
-            this.player = new objects.Player(this.assetManager);
+            this.background = new objects.Background();
+            this.player = new objects.Player();
             // this.enemy = new objects.Enemy(this.assetManager);
             this.enemies = new Array();
             this.enemyNum = 5;
             for (var i = 0; i < this.enemyNum; i++) {
-                this.enemies[i] = new objects.Enemy(this.assetManager);
+                this.enemies[i] = new objects.Enemy();
             }
             this.scoreBoard = new managers.Scoreboard();
             this.scoreBoard.x = 10;
@@ -46,7 +47,18 @@ var scenes;
             // this.enemy.Update();
             this.enemies.forEach(function (e) {
                 e.Update();
-                managers.Collision.Check(_this.player, e);
+                _this.player.isDead = managers.Collision.Check(_this.player, e);
+                if (_this.player.isDead && !_this.isExploding) {
+                    // If the player is dead and hasn't exploded...explode!
+                    // Disable music
+                    _this.backgroundMusic.stop();
+                    // Create the explosion
+                    _this.explosion = new objects.Explosion(_this.player.x, _this.player.y);
+                    _this.explosion.on("animationend", _this.handleExplosion);
+                    _this.addChild(_this.explosion);
+                    _this.isExploding = true;
+                    _this.removeChild(_this.player);
+                }
             });
         };
         PlayScene.prototype.Main = function () {
@@ -58,6 +70,11 @@ var scenes;
                 _this.addChild(e);
             });
             this.addChild(this.scoreBoard);
+        };
+        PlayScene.prototype.handleExplosion = function () {
+            this.stage.removeChild(this.explosion);
+            this.isExploding = false;
+            managers.Game.currentScene = config.Scene.OVER;
         };
         return PlayScene;
     }(objects.Scene));

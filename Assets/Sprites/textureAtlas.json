@@ -1,0 +1,41 @@
+{
+
+"images": [
+    "textureAtlas2.png"
+],
+
+"framerate": 20,
+"frames": [
+    [19, 1, 39, 31, 0, 0, 0],
+    [153, 154, 98, 85, 0, 0, 0],
+    [101, 1, 36, 36, 0, 0, 0],
+    [112, 90, 68, 62, 0, 0, 0],
+    [1, 90, 66, 60, 0, 0, 0],
+    [182, 90, 68, 62, 0, 0, 0],
+    [1, 154, 74, 62, 0, 0, 0],
+    [77, 154, 74, 62, 0, 0, 0],
+    [1, 1, 16, 21, 0, 0, 0],
+    [60, 1, 39, 31, 0, 0, 0],
+    [69, 90, 41, 61, 0, 0, 0],
+    [1, 39, 190, 49, 0, 0, 0]
+],
+
+"animations": {
+    "backButton": { "frames": [0] },
+    "enemy": { "frames": [1] },
+    "explosion" : { 
+        "frames": [2,7],
+        "speed" : 0.1
+    },
+    "laser" : { "frames" : [8]},
+    "nextButton": { "frames": [9]},
+    "player": { "frames": [10]},
+    "startButton": { "frames": [11]}
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:85b785fdb457bd70895869e7d9c5a41f:03d7e1041a4dea11cf66ae152751bd8b:2b5604bc88faefd55ddac16e9bce1532$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+}

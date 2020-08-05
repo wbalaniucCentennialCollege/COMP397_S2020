@@ -12,20 +12,26 @@ var objects;
 (function (objects) {
     var Player = (function (_super) {
         __extends(Player, _super);
-        // Variables
         // Constructor
-        function Player(assetManager) {
-            var _this = _super.call(this, assetManager, "player") || this;
+        function Player() {
+            var _this = _super.call(this, "player") || this;
+            _this.laserCount = 0;
             _this.Start();
             return _this;
         }
         Player.prototype.Start = function () {
             this.x = 320;
             this.y = 700;
+            this.isDead = false;
+            this.Lasers = new Array();
         };
         Player.prototype.Update = function () {
             this.Move();
             this.CheckBound();
+            this.LaserFire();
+            this.Lasers.forEach(function (laser) {
+                laser.Update();
+            });
         };
         Player.prototype.Reset = function () { };
         Player.prototype.Move = function () {
@@ -51,6 +57,18 @@ var objects;
             // Left boundary
             if (this.x <= this.halfW) {
                 this.x = this.halfW;
+            }
+        };
+        Player.prototype.LaserFire = function () {
+            var ticker = createjs.Ticker.getTicks();
+            if (!this.isDead && managers.Game.keyboardManager.shoot && (ticker % 10 == 0)) {
+                this.laserSpawn = new math.Vec2(this.x, this.y - this.halfH);
+                var laser = new objects.Laser();
+                laser.x = this.laserSpawn.x;
+                laser.y = this.laserSpawn.y;
+                this.Lasers[this.laserCount] = laser;
+                managers.Game.currentSceneObject.addChild(laser);
+                this.laserCount++;
             }
         };
         return Player;
